@@ -768,9 +768,12 @@ export class JsonSchemaGenerator {
                                     pattern.push(`${text}.*`);
                                 }
 
-                                if (type.flags & ts.TypeFlags.Number
-                                    || type.flags & ts.TypeFlags.BigInt) {
-                                    pattern.push(`${text}[0-9]*`);
+                                if (type.flags & ts.TypeFlags.Number) {
+                                    pattern.push("".concat(text, "-?[0-9]+(\.[0-9]+)?"));
+                                }
+
+                                if (type.flags & ts.TypeFlags.BigInt) {
+                                    pattern.push(`${text}-?[0-9]+`);
                                 }
 
                                 if (type.flags & ts.TypeFlags.Undefined) {
